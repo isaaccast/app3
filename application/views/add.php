@@ -44,29 +44,30 @@
             #rating{
                 vertical-align: middle;
             }
+            .error{
+                color: red; 
+                display: block;
+            }
         </style>
         
     </head>
     <body>
-        <a href="/">Home</a><a href="/books/logout">Logout</a>
-        <h2>Add a New Book Title and a Review:</h2>
-        <form action='/books/add_book_review' method='post' id='add_book_review'>
-            <label>Book Title:<input type='text' name='title'></label>
-            <label>Author:</label>
-            <div id='new_author'>
-                <p>Choose from the list:</p>
-                <select name='author' form='add_book_review'>
-                    <option></option>
-                    <option value='Stephen King'>Stephen King</option>
-                    <option value='J.K. Rowling'>J.K. Rowling</option>
-                    <option value='Ernest Hemingway'>Ernest Hemingway</option>
-                    <option value='Mark Twain'>Mark Twain</option>
-                </select><br>
-                <p>Or add a new author:<input type='text' name='author'></p>
-            </div>
-            <label>Review:<textarea type='text' name='comment'></textarea></label>
-            <label >Rating:<input  id='rating' type="number" name="rating" value='1' min="1" max="5">  stars.</label>
-            <input type='submit' value='Add Book and Review'>
+        <a href="/">Home</a><a href="/trips/logout">Logout</a>
+        <h2>Add a Trip</h2>
+        <form action='/trips/add_trip' method='post'>
+            <label>Destination:<input type='text' name='place'></label>
+            <label>Description:<input type='text' name='plan'></label>
+            <label>Travel Date From:<input type='date' name='start'></label>
+            <label>Travel Date To:<input type='date' name='end'></label>
+            <input type='submit' value="Add">
         </form>
+        <div class='error'>
+                   <?php 
+                      if($this->session->flashdata("trip_error")) 
+                      {
+                        echo $this->session->flashdata("trip_error");
+                      }
+                    ?>
+                </div>
     </body>
 </html>

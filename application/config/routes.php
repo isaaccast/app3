@@ -38,11 +38,9 @@
 |
 */
 
-$route['default_controller'] = "books";
-$route['/books/show_user/(:any)'] = "books/show_user/$1";
-$route['/books/get_book/(:any)'] = "books/get_book/$1"; 
-$route['/books/add_review/(:any)'] = "books/add_review/$1"; 
-$route['/books/remove_review/(:any)/(:any)'] = "books/remove_review/$1/$2"; 
+$route['default_controller'] = "trips";
+$route['/trips/details/(:any)'] = "/trips/details/$1"; 
+$route['/trips/add_des/(:any)'] = "/trips/add_des/$1"; 
 $route['404_override'] = '';
 
 

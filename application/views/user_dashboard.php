@@ -52,25 +52,59 @@
         
     </head>
     <body>
-        <h2>Welcome <?= $this->session->userdata['first_name']?>!</h2><a href="/books/add_page">Add Book and Review</a> <a href="/books/logout">Log Off</a>
-               <div id='recent'>
-            <h3>Recent Book Reviews:</h3>
-            <div id='review'>
-                <?php for ($i=1; $i <4 ; $i++) { ?> 
-                <h4><a href="/books/get_book/<?= $books[count($books)-$i]['book_id'] ?>"><?= $books[count($books)-$i]['title'] ?></a></h4>
-                <p>Rating:</p>
-                <p><a href="/books/show_user/<?= $books[count($books)-$i]['id'] ?>"><?= $books[count($books)-$i]['first_name'] ?></a>says: <?= $books[count($books)-$i]['comment'] ?></p>
-                <p>Posted on:<?= $books[count($books)-$i]['created_at'] ?></p>
-               <?php } ?>
+        <h2>Welcome <?= $this->session->userdata['name']?>!</h2><a href="/trips/add_page">Add Travel Plan</a> <a href="/trips/logout">Log Off</a>
+        <div id='container'>
+            <h3>Your Trip Schedules:</h3>
+            <div id='trips'>
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            foreach ($trips as $trip) {?>
+                            <tr>
+                                 <td><a href="/trips/details/<?= $trip['des_id'] ?>"><?= $trip['place'] ?></a></td>
+                                <td><?= $trip['start'] ?></td>
+                                <td><?= $trip['end'] ?></td>
+                                <td><?= $trip['plan'] ?></td>
+                            </tr>    
+                            <?php }
+                         ?>
+                    </tbody>
+                </table>
             </div>
-            <div id='side_bar'>
-                <h3>Other Books with Reviews:</h3>
-                <div id='all_reviews'>
-                    <?php foreach ($books as $book) {
-                        ?><a href="/books/get_book/<?=$book['book_id']?>"><?=$book['title'] ?></a>
-                   <?php } ?>
-                </div>
+           
+            <h3>Other User's Travel Plans:</h3>  
+             <div id='others'>
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Name</th>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Do You Want to Join?</th>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            foreach ($others as $other) {?>
+                             
+                             <tr>
+                                <td><?= $other['planned_by'] ?></td>
+                                <td><a href="/trips/details/<?= $other['des_id'] ?>"><?= $other['place'] ?></a></td>
+                                <td><?= $other['start'] ?></td>
+                                <td><?= $other['end'] ?></td>
+                                <td><a href="/trips/add_des/<?= $other['des_id'] ?>">Join</a></td>
+                            </tr>    
+                            <?php }
+                         ?>
+                    </tbody>
+                </table>    
             </div>
+            
         </div>
 
         

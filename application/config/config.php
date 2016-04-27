@@ -16,7 +16,7 @@
 | environments.
 |
 */
-$config['base_url'] = 'http://'.$_SERVER['HTTP_POST'];
+$config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'];
 
 /*
 |--------------------------------------------------------------------------
