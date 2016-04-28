@@ -50,8 +50,8 @@
                       }
                     ?>
                 </div>
-              <form action="/trips/login" method="post">
-                Username: <input type="text" name="username" />
+              <form action="/pokes/login" method="post">
+                Email: <input type="text" name="email" />
                 Password: <input type="password" name="password" />
                 <input class ='button' type="submit" value="Login" />
               </form> 
@@ -75,11 +75,14 @@
                       }
                     ?>
                 </div>
-            <form action='/trips/register' method='post'>
+            <form action='/pokes/register' method='post'>
                 Name: <input type='text' name='name'>
-                Username: <input type='text' name='username'>
+                Alias: <input type='text' name='alias'>
+                Email: <input type='text' name='email'>
                 Password: <input type='password' name='password'>
+                <p>*Password should be at least 8 characters</p>
                 Confirm Password: <input type='password' name='cpassword'>
+                Date of Birth: <input type='date' name='dob'>
                 <input type='submit' value='Register' class='button'>
             </form>
         </div>

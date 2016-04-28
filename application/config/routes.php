@@ -38,9 +38,8 @@
 |
 */
 
-$route['default_controller'] = "trips";
-$route['/trips/details/(:any)'] = "/trips/details/$1"; 
-$route['/trips/add_des/(:any)'] = "/trips/add_des/$1"; 
+$route['default_controller'] = "pokes";
+$route['/pokes/add_poke/(:any)'] = "/pokes/add_poke/$1";  
 $route['404_override'] = '';
 
 

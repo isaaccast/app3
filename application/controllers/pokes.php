@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Trips extends CI_Controller {
+class Pokes extends CI_Controller {
 	
     //loads the login view
     public function index()
@@ -10,30 +10,30 @@ class Trips extends CI_Controller {
 
     public function user_dashboard()
     {
-        $this->load->view('user_dashboard', array('trips'=>$this->trip->users_trips(), 'others'=>$this->trip->others())); 
+        $this->load->view('user_dashboard', array('pokes'=>$this->poke->users_pokes(), 'others'=>$this->poke->others())); 
     }
 
     public function register()
     {
-        $this->trip->register($this->input->post()); 
+        $this->poke->register($this->input->post()); 
     }
     //processes the student login
     public function login()
     {
-        $username = $this->input->post('username');
+        $email = $this->input->post('email');
         $password = md5($this->input->post('password'));
-        $user = $this->trip->get_user($username);
+        $user = $this->poke->get_user($email);
         if($user && $user['password'] == $password)
         {
             $user = array(
                'id' => $user['id'],
                'name' => $user['name'],
-               'username' => $user['username'],
+               'alias' => $user['alias'],
                'is_logged_in' => TRUE
             );
             $this->session->set_userdata($user);
             if($this->session->userdata['is_logged_in'] === TRUE){
-            redirect('/trips/user_dashboard'); 
+            redirect('/pokes/user_dashboard'); 
             }
         }
         else
@@ -52,23 +52,9 @@ class Trips extends CI_Controller {
         redirect("/");   
     }
 
-    public function add_page()
+    public function add_poke($user_id)
     {
-        $this->load->view('add'); 
-    }
-    public function add_trip()
-    {
-        $this->trip->add_trip($this->input->post()); 
-    }
-
-    public function details($trip_id)
-    {
-        $this->load->view('details', array("trip"=>$this->trip->find_trip($trip_id), "companions"=>$this->trip->find_companions($trip_id)));
-    }
-
-    public function add_des($des_id)
-    {
-        $this->trip->add_des($des_id); 
+        $this->poke->add_poke($user_id); 
     }
 
 }

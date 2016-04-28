@@ -21,85 +21,64 @@
             }
             a{
                 display: inline-block;
-                margin: 0px;
+                margin-left: auto;
             }
-            #login{
+            #pokes{
                 border: 1px solid black; 
             }
-            #review{
-                display: inline-block;
-                width: 300px; 
+            h2{
+                display: inline-block; 
             }
-            #review p{
-                margin-left: 35px;  
-                
+            .table{
+                empty-cells: hide;
             }
-            #side_bar{
-                display: inline-block;
-                float: right;
-            }
-            #all_reviews{
-                border: 1px solid black; 
-                width: 190px;
-                height: auto; 
-                display: block;
-            }
-            #all_reviews a{
-                display: block;
-                margin: 3px; 
-            }
+            
         </style>
         
     </head>
     <body>
-        <h2>Welcome <?= $this->session->userdata['name']?>!</h2><a href="/trips/add_page">Add Travel Plan</a> <a href="/trips/logout">Log Off</a>
+        <h2>Welcome <?= $this->session->userdata['name']?>!</h2><a href="/pokes/logout">Log Off</a>
         <div id='container'>
-            <h3>Your Trip Schedules:</h3>
-            <div id='trips'>
-                <table class="table table-bordered">
-                    <thead>
-                        <th>Destination</th>
-                        <th>Travel Start Date</th>
-                        <th>Travel End Date</th>
-                        <th>Plan</th>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            foreach ($trips as $trip) {?>
-                            <tr>
-                                 <td><a href="/trips/details/<?= $trip['des_id'] ?>"><?= $trip['place'] ?></a></td>
-                                <td><?= $trip['start'] ?></td>
-                                <td><?= $trip['end'] ?></td>
-                                <td><?= $trip['plan'] ?></td>
-                            </tr>    
-                            <?php }
-                         ?>
-                    </tbody>
-                </table>
+            <h3><?= count($pokes, 0) ?> user(s) have poked you!</h3>
+            <div id='pokes'>
+                <?php foreach ($pokes as $poke) { if($poke['poked_by'] != $this->session->userdata['id']){ ?>
+                    <p><?= $poke['name'] ?> has poked you <?= $poke['count'] ?> times</p>
+                <?php } } ?>
             </div>
            
-            <h3>Other User's Travel Plans:</h3>  
-             <div id='others'>
+            <h3>People you may want to poke:</h3>  
+             <div id='new_pokes'>
                 <table class="table table-bordered">
                     <thead>
                         <th>Name</th>
-                        <th>Destination</th>
-                        <th>Travel Start Date</th>
-                        <th>Travel End Date</th>
-                        <th>Do You Want to Join?</th>
+                        <th>Alias</th>
+                        <th>Email Address</th>
+                        <th>Poke History</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
-                        <?php 
-                            foreach ($others as $other) {?>
-                             
+                        <?php  
+                            foreach ($others as $other) {
+                                if($other['user_id'] != $this->session->userdata['id']) { ?>
                              <tr>
-                                <td><?= $other['planned_by'] ?></td>
-                                <td><a href="/trips/details/<?= $other['des_id'] ?>"><?= $other['place'] ?></a></td>
-                                <td><?= $other['start'] ?></td>
-                                <td><?= $other['end'] ?></td>
-                                <td><a href="/trips/add_des/<?= $other['des_id'] ?>">Join</a></td>
+                                <td><?= $other['name'] ?></td>
+                                <td><?= $other['alias'] ?></td>
+                                <td><?= $other['email'] ?></td>
+                                <td><?php if(isset($other['count']) && isset($other['name']) && $other['user_id'] != $other['poked_by']){
+                                            echo $other['count'];
+                                            }
+                                            elseif(isset($other['name']) && $other['count'] == 1 && $other['user_id'] == $other['poked_by'])
+                                            {
+                                                echo 0; 
+                                            }
+                                            else
+                                            {
+                                                echo $other['count'] -1; 
+                                            } ?></td>
+                                <?php if(isset($other['name'])){echo 
+                                    "<td><button><a href='/pokes/add_poke/" .$other['user_id']. "'>Poke</a></button></td>"; } ?>
                             </tr>    
-                            <?php }
+                            <?php } }
                          ?>
                     </tbody>
                 </table>    

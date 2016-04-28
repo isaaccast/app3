@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?= $user[0]['first_name'] ?>'s Page</title>
+        <title>Details</title>
         <link rel=stylesheet href="/style.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -36,7 +36,7 @@
         <a href="/trips/user_dashboard">Home</a><a href="/trips/logout">Log Off</a>
         <div id='recent'>
                 <h3><?= $trip['place'] ?> </h3>
-                <p>Planned By:<?= $trip['name'] ?></p>
+                <p>Planned By:<?= $trip['planned_by'] ?></p>
                 <p>Description:<?= $trip['plan'] ?></p>
                 <p>Travel Date From:<?= $trip['start'] ?></p>
                 <p>Travel Date To:<?= $trip['end'] ?></p>
